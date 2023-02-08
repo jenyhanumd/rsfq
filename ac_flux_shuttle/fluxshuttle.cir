@@ -1,0 +1,36 @@
+* FLUX SHUTTLE MODULE
+
+* Netlist for the flux shuttle given in Figure 5 of the paper, with citation key 2015SemenovNew; url http://ieeexplore.ieee.org/document/6994809/ .
+
+
+.subckt fs_mod A B C_in C_out IC=.125m
+
+    .param l1av = 1.980e-16/IC
+    .param l2av = 7.623e-16/IC
+    .param l2bv = 6.600e-17/IC
+    .param l3v  = 5.511e-16/IC
+    .param l4av = 1.142e-15/IC
+    .param l4bv = 1.419e-16/IC
+    .param l1bv = 1.551e-16/IC
+    .param l6v  = 1.980e-15/IC
+
+    l1a A 1 l1av
+    l2a 1 Y l2av
+    l2b Y 2 l2bv
+    l3  2 3 l3v
+    l4a 3 Z l4av
+    l4b Z 4 l4bv
+    l1b 4 B l1bv
+
+    x1 1 0 p1 sj IC=IC
+    x2 2 0 p2 sj IC=IC
+    x3 3 0 p3 sj IC=IC
+    x4 4 0 p4 sj IC=IC
+
+    * coupling coil
+    l6 Y    Z     l6v
+    lp C_in C_out l6v
+
+    k1 lp l6 1
+
+.ends fs_mod

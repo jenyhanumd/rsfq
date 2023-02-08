@@ -1,0 +1,52 @@
+* FLUX SHUTTLE CORNER MODULE
+
+* Netlist for the flux shuttle given in Figure 3 of the paper, with citation key 2017SemenovACBiased; url https://ieeexplore.ieee.org/document/7856973/ .
+
+.subckt fs_corner_mod A B out freq=500meg IC=.125m IC_out=.1m imax=2 lout_fact=0.5
+
+    .param imax_amp = imax*IC
+
+    .param l1av = 1.320e-16/IC
+    .param l2av = 7.425e-16/IC
+    .param l2bv = 9.900e-18/IC
+    .param l3v  = 4.653e-16/IC
+    .param l4av = 2.310e-17/IC
+    .param l4bv = 1.224e-15/IC
+    .param l4cv = 1.320e-17/IC
+    .param l1bv = 2.310e-16/IC
+    .param l6v  = 1.980e-15/IC
+    .param l7v  = 6.600e-16/IC
+
+    .param lo_ratio = Phi0/IC_out
+    .param loutv = lout_fact*lo_ratio
+
+    l1a A 1 l1av
+    l2a 1 Y l2av
+    l2b Y 2 l2bv
+    l3  2 3 l3v
+    l4a 3 O l4av
+    l4b O Z l4av
+    l4c Z 4 l4bv
+    l1b 4 B l1bv
+
+    l7   O 5   l7v
+    lout 5 out loutv 
+
+    x1 1 0 p1 sj IC=IC
+    x2 2 0 p2 sj IC=IC
+    x3 3 0 p3 sj IC=IC
+    x4 4 0 p4 sj IC=IC
+    x5 5 0 p5 sj IC=IC_out
+
+    * coupling coil
+    l6 Y Z l6v
+
+    * transformer
+    lp J K l6v
+    i0 K J sin(0 imax_amp freq 0 0)
+    * io K J pwl(tvals xvals)
+    * dummy resistor
+    rd J 0 1e6
+    k1 lp l6 1
+
+.ends fs_corner_mod

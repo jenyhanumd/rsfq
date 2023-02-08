@@ -1,0 +1,4 @@
+* FLUX SHUTTLE: LIBRARY
+
+.inc ../library/ac_flux_shuttle/fluxshuttle.cir
+.inc ../library/ac_flux_shuttle/fluxshuttle_corner.cir
