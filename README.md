@@ -1,6 +1,5 @@
 # Circuit Descriptions
 
-
 ## General
 
 ### `constants.cir`
@@ -40,6 +39,8 @@ Miscellaneous, general circuit models.
 
 ## Rapid Single Flux Quantum (RSFQ)
 
+For these subcircuits to function, include the file `./general.cir` to add junction model, etc.
+
 ### `jtl.cir`
 
 Josephson transmission line (JTL) circuit model.
@@ -73,8 +74,6 @@ Josephson transmission line (JTL) circuit model.
 - `swbuffer`: a "sandwich buffer"
     - `IC`: the critical current of both the `jtlmod` and `buffer`
     - *Nodes*: `A`: input; `B`: output
-
-***
 
 ### `pulse_splitter.cir`
 
