@@ -1,0 +1,7 @@
+* MISCELLANEOUS CIRCUITS
+
+* simple subckt to ramp up bias currents from zero at beginning of analysis
+.subckt ibias p n IB=75u t=100p
+    I1 p n pwl(0 0 t IB)
+    *I1 p n dc IB
+.ends ibias

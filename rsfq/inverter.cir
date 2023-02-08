@@ -1,0 +1,34 @@
+* RSFQ: Inverter
+
+* requires compound_buffers.cir to be included
+
+.subckt not A T F IC=.1m
+
+    .param IC_big=1.4*IC
+    .param Lv=1.25*Phi0/IC_big
+    .param Lio=0.5*Phi0/IC
+
+    LA A 1 Lio
+    LT T 2 Lio
+    LF F 3 Lio
+
+    L 1 2 Lv
+
+    xj1 1 3 pA cdjj IC=IC_big
+    xj2 2 3 pT cdjj IC=IC_big
+    xj3 3 0 pF cdjj IC=IC_big
+
+    xib 0 1 ibias IB=0.7*IC_big
+
+.ends not
+
+* Not cell, surrounded by swbuffers
+.subckt not_with_swb A T F IC=.1m
+
+    xA A AA swbuffer IC=IC
+    xT T TT swbuffer IC=IC
+    xF FF F swbuffer IC=IC
+
+    xnot AA TT FF IC=IC
+
+.ends

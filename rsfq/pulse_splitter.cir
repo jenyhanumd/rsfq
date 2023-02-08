@@ -1,0 +1,24 @@
+* RSFQ: pulse splitter
+
+.subckt pulse_splitter A B C IC=.1m
+
+    .param Ic1=1.4*IC
+    .param Lv=.6*Phi0/IC
+    .param L1v=.6*Phi0/Ic1
+
+    .param Ib=.75*IC
+    .param Ib1v=.75*Ic1
+
+    L1 A 1 L1v
+    L2 1 B Lv
+    L3 1 C Lv
+
+    xj1 1 0 p1 cdjj IC=Ic1
+    xj2 B 0 p2 cdjj IC=IC
+    xj3 C 0 p3 cdjj IC=IC
+
+    xIb1 0 1 ibias IB=Ib1v
+    xIb2 0 B ibias IB=Ib
+    xIb3 0 C ibias IB=Ib
+
+.ends pulse_splitter

@@ -1,0 +1,56 @@
+* SFQ PRODUCTION CIRCUITS
+
+* circuits to produce SFQ pulses for input into the flux shuttle circuits
+
+* a DC to SFQ converter, taken from Figure 3, citation key 1993PolonskyNew; url http://ieeexplore.ieee.org/document/233530/ . 
+.subckt dc_to_sfq i o IC=.125m rise_time=100p
+
+    .param l1v = 3.500e-16/IC
+    .param l2v = 3.250e-16/IC
+    .param l3v = 6.000e-16/IC
+    .param l4v = 1.000e-16/IC
+    .param l5v = 3.000e-16/IC
+    .param l6v = 6.000e-16/IC
+    .param l7v = 5.000e-16/IC
+    .param l8v = 5.000e-16/IC
+    .param l9v = 1.000e-15/IC
+
+    x1 1 3 p1 sj IC=IC
+    x2 2 3 p2 sj IC=IC
+    x3 3 0 p3 sj IC=IC
+    x4 5 0 p4 sj IC=IC
+    x5 6 0 p5 sj IC=IC
+    x6 8 0 p6 sj IC=IC
+
+    xi1 0 4 ibias IB=1.52*IC t=rise_time
+    xi2 0 7 ibias IB=1.52*IC t=rise_time
+
+    L1 i 1 l1v
+    L2 i 2 l2v
+    L3 2 0 l3v
+    L4 3 4 l4v
+    L5 4 5 l5v
+    L6 5 6 l6v
+    L7 6 7 l7v
+    L8 7 8 l8v
+    L9 8 o l9v
+
+.ends dc_to_sfq
+
+* an SFQ production module
+.subckt sfq_mod o IC=.125m freq=500meg imax=.25m delay=2
+
+    * delay is given in *cycles* waited before sending pulse
+
+    .param T = 1/freq
+    .param d = delay*T
+    .param rt = T/2
+    .param t1=d
+    .param t2=d+rt
+    .param t3=d+2*rt
+
+    xin 1 o dc_to_sfq IC=IC rise_time=rt
+    vt 11 1 dc 0
+    Iin 0 11 pwl(0 0 t1 0 t2 imax t3 0)
+
+.ends sfq_mod

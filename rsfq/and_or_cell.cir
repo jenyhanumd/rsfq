@@ -1,0 +1,24 @@
+* RSFQ: and-or cell
+
+* requires buffer, pulse splitter, or
+
+.subckt and_or A B C D F T IC=.1m
+
+    .param IC7=1.4*IC
+    .param Ib=.5*IC
+    .param Lv=0.5*Phi0/IC
+
+    xAB A B 1 3 or IC=IC
+    xCD C D 2 4 or IC=IC
+
+    xT T 13 14 ps IC=IC
+    xb1 13 3 buffer IC=IC
+    xb2 14 4 buffer IC=IC
+
+    x5 1 5 p5 cdjj IC=IC
+    x6 2 5 p6 cdjj IC=IC
+    x7 5 0 p7 cdjj IC=IC7
+    xIb  0 5  ibias IB=Ib
+    L3 5 F Lv
+
+.ends and_or

@@ -1,0 +1,33 @@
+* RSFQ: RS Flip Flop
+
+.subckt ff R S F IC=.1m
+
+    .param Ic1v=IC
+    .param L1v=0.5*Phi0/Ic1v
+
+    .param Ic2v=IC
+    .param L2v=L1v
+
+    .param Ic3v=1.41*IC
+    .param Ic4v=Ic3v
+
+    .param Ibv=IC
+    .param Lv=1.25*Phi0/IC
+    .param L3v=0.5*Phi0/Ic3v
+
+    L1 R 1 L1v
+    xj1 1 4 p1 cdjj IC=Ic1v
+
+    L2 S 2 L2v
+    xj2 2 3 p2 cdjj IC=Ic2v
+
+    Ib 0 ib dc Ibv
+    V ib 3 dc 0
+    xj3 3 0 p3 cdjj IC=Ic3v
+
+    L 3 4 Lv
+
+    xj4 4 0 p4 cdjj IC=Ic4v
+    L3 4 F L3v
+
+.ends ff

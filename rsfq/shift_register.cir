@@ -1,0 +1,27 @@
+* RSFQ: Shift Register
+
+.subckt sr_mod S So To T IC=.1m
+
+    .param L_even = 1.5*Phi0/IC
+    .param L_odd  = 0.50*Phi0/IC
+
+    L2 S 2  L_even
+    L4 2 4  L_even
+    L6 4 So L_even
+
+    L3 To 3 L_odd
+    L5 3  5 L_odd
+    L7 5  T L_odd
+
+    x1 To 2 p1 cdjj IC=IC
+    x2 2  0 p2 cdjj IC=1.4*IC
+    x3 3  4 p3 cdjj IC=IC
+    x4 4  0 p4 cdjj IC=1.4*IC
+    x5 5 So p5 cdjj IC=IC
+    x6 So 0 p6 cdjj IC=1.4*IC
+
+    xIb1 0 To ibias IB=.5*IC
+    xIb3 0 3  ibias IB=.5*IC
+    xIb5 0 5  ibias IB=.5*IC
+
+.ends sr_mod

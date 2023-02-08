@@ -1,0 +1,28 @@
+* RSFQ: confluence buffer
+
+.subckt confluence_buffer A B C IC=.1m
+
+    .param L=0.5*Phi0/IC
+
+    .param Ic12=1.4*IC
+    .param Ib1v=1.4*IC
+    .param Ib2v=0.7*IC
+
+    L1 A 1 L
+    xj1 1 0 p1 cdjj IC=Ic12
+
+    L2 B 2 L
+    xj2 2 0 p2 cdjj IC=Ic12
+
+    xj3 1 3 p3 cdjj IC=IC
+    xj4 2 3 p4 cdjj IC=IC
+
+    L3 3 4 L
+    L4 4 C L
+
+    xj5 4 0 p5 cdjj IC=IC
+
+    Ib1 0 3 dc Ib1v
+    Ib2 0 4 dc Ib2v
+
+.ends confluence_buffer

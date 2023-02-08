@@ -1,0 +1,25 @@
+* RSFQ: T Flip-Flop
+
+.subckt tff A F0 F1 IC=.1m
+
+    .param L1v=0.25*Phi0/IC
+    .param L3v=0.5*Phi0/IC
+    .param L2v=0.75*Phi0/IC
+
+    La A a1 L1v
+    xj2 a1 1 p2 cdjj IC=IC
+    xj4 a1 3 p4 cdjj IC=IC
+
+    LF0 F0 1  L3v
+    L1  1  2  L2v
+    L2  2  3  L2v
+    LF1 3  F1 L3v
+
+    R 2 0 1
+
+    xj1 1 0 p1 cdjj IC=1.4*IC
+    xj3 3 0 p3 cdjj IC=1.4*IC
+
+    xib 0 1 ibias IB=0.7*IC
+
+.ends tff

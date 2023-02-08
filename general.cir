@@ -1,0 +1,5 @@
+* GENERAL CIRCUITS
+
+.inc ../library/general/constants.cir
+.inc ../library/general/junction.cir
+.inc ../library/general/misc.cir

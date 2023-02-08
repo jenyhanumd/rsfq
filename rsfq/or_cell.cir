@@ -1,0 +1,37 @@
+* RSFQ: OR Cell
+
+.subckt or A B F T IC=.1m
+
+    .param IC_L=1.41*IC
+
+    .param L_io=0.5*Phi0/IC_L
+    .param L3v=0.5*Phi0/IC
+    .param Lv=1.25*Phi0/IC
+
+    .param I_b1=1.41*IC
+    .param I_b2=IC
+
+    L1 A 1 L_io
+    x1 1 3 p1 cdjj IC=IC
+    x2 1 0 p2 cdjj IC=IC_L
+
+    L2 B 2 L_io
+    x3 2 3 p3 cdjj IC=IC
+    x4 2 0 p4 cdjj IC=IC_L
+
+    xIb1 0 3 ibias IB=I_b1
+
+    L3 3 4 L3v
+    x5 4 5 p5 cdjj IC=IC
+
+    xIb2 0 5 ibias IB=I_b2
+
+    x6 5 0 p6 cdjj IC=IC_L
+    L 5 6 Lv
+    x7 6 0 p7 cdjj IC=IC_L
+
+    L5 6 F L_io
+
+    x8 T 6 p8 cdjj IC=IC
+
+.ends or

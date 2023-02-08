@@ -1,0 +1,17 @@
+* RSFQ: CIRCUIT LIBRARY
+
+.inc ../library/rsfq/jtl.cir
+.inc ../library/rsfq/buffer.cir
+.inc ../library/rsfq/dc-sfq_converter.cir
+.inc ../library/rsfq/compound_buffers.cir
+
+.inc ../library/rsfq/pulse_splitter.cir
+.inc ../library/rsfq/confluence_buffer.cir
+.inc ../library/rsfq/rs_flip-flop.cir
+.inc ../library/rsfq/t_flip-flop.cir
+.inc ../library/rsfq/or_cell.cir
+.inc ../library/rsfq/inverter.cir
+.inc ../library/rsfq/and_or_cell.cir
+
+
+

@@ -1,0 +1,14 @@
+* GENERAL SIMULATION PARAMETERS
+
+* Constants
+.param Phi0=2.07e-15
+.param qe=1.6e-19
+.param hbar=1.05e-34
+
+* * Parameters
+* .param IC=.125m
+* .param Im=.25m
+* .param Ic1=IC
+* .param Ic2=IC
+* .param Ic3=IC
+* .param Ic4=IC

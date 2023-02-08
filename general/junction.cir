@@ -1,0 +1,42 @@
+* JUNCTION MODELS
+
+* Various junction models
+
+* RCSJ Junction, implemented manually
+.subckt rcsj_model pos neg phase IC=.1m R=1 beta_c=1
+
+    .param cap_num=beta_c*hbar
+    .param cap_den=2*qe*IC*R*R
+    .param cap=cap_num/cap_den
+
+    .model jjm jj(rtype=0, cct=1, icrit=IC)
+
+    * b1 pos mid phase jjm
+    * c1 pos mid cap
+    * r1 pos mid R
+    vt mid neg dc 0
+
+    b1 pos jj phase jjm
+    c1 pos cc cap
+    r1 pos rr R
+    vc cc mid dc 0
+    vjj jj mid dc 0
+    vr rr mid dc 0
+
+
+.ends rcsj_model
+
+
+* Shunted junction
+.subckt sj p n ph R=2 IC=.125m
+
+    x1 p n ph rcsj_model IC=IC R=R beta_c=.5
+
+.ends sj
+
+* critically damped junction
+.subckt cdjj p n ph IC=.1m
+
+    x1 p n ph rcsj_model IC=IC R=1 beta_c=1
+
+.ends cdjj

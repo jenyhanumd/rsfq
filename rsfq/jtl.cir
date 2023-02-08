@@ -1,0 +1,29 @@
+* RSFQ: Josephson Transmission Line (JTL)
+
+* assumes library/general.cir is included
+
+
+* four JJ JTL; for use as a "pulse rectifier"
+* this model purposefully does not include input
+*   and output inductors
+* .subckt jtlmod 1 4 IC=.1m
+.subckt jtlmod 1 4 IC=.1m L=0
+
+    * .param L=.5*Phi0/IC
+    .param Ib=0.75*IC
+
+    L1 1 2 L
+    L2 2 3 L
+    L3 3 4 L
+
+    xIb1 0 1 ibias IB=Ib t=100p
+    xIb2 0 2 ibias IB=Ib t=100p
+    xIb3 0 3 ibias IB=Ib t=100p
+    xIb4 0 4 ibias IB=Ib t=100p
+
+    x1 1 0 p1 cdjj IC=IC
+    x2 2 0 p2 cdjj IC=IC
+    x3 3 0 p3 cdjj IC=IC
+    x4 4 0 p4 cdjj IC=IC
+
+.ends jtlmod

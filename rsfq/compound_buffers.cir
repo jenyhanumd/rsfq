@@ -1,0 +1,19 @@
+* RSFQ: Compound Buffer Circuits
+
+* assumes that the following are included:
+*   library/general.cir
+*   library/rsfq/jtl.cir
+*   library/rsfq/buffer.cir
+*   library/rsfq/dc-sfq_converter.cir
+
+
+* "sandwich buffer"
+* buffer with JTL I/O
+*   - inductors are *not* included at A and B
+.subckt swbuffer A B IC=.1m
+
+    xin   A  aa jtlmod IC=IC
+    xbuff aa bb buffer IC=IC
+    xout  bb B  jtlmod IC=IC
+
+.ends swbuffer
